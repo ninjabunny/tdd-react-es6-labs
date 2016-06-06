@@ -10,6 +10,10 @@ React Project Template with automated build.
 
 ## Usage
 
+To build:
+
+1. gulp
+
 ## Credits
 
 ## License
