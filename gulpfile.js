@@ -1,4 +1,5 @@
 const gulp = require('gulp');
+const eslint = require('gulp-eslint');
 const jshint = require('gulp-jshint');
 const semver = require('semver');
 
@@ -23,6 +24,13 @@ gulp.task('jshint', function() {
         .pipe(jshint.reporter('fail'));
 });
 
+gulp.task('eslint', function() {
+    return gulp.src(['**/*.js','!node_modules/**'])
+        .pipe(eslint())
+        .pipe(eslint.format())
+        .pipe(eslint.failAfterError());
+});
+
 gulp.task('version', function(done) {
     const packageJson = require('./package.json');
     const expectedVersion = packageJson.engines.node;
@@ -37,8 +45,9 @@ gulp.task('version', function(done) {
 });
 
 //default task
-gulp.task('default', gulp.series(gulp.parallel('version', 'jshint'),
+gulp.task('default', gulp.series(gulp.parallel('version', 'eslint'),
     function(done){
-    console.log('BUILD OK');
-    done();
-}));
+        console.log('BUILD OK');
+        done();
+    }
+));
