@@ -11,13 +11,12 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine', 'commonjs'],
+    frameworks: ['jasmine'],
 
 
     // list of files / patterns to load in the browser
     files: [
-        'spec/**/*Spec.js',
-        'src/**/*.js'
+        'spec/**/*Spec.js'
     ],
 
 
@@ -29,8 +28,20 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'src/**/*.js': ['commonjs'],
-      'spec/**/*.js': ['commonjs']
+      'src/**/*.js': ['webpack'],
+      'spec/**/*.js': ['webpack']
+    },
+    webpack: {
+      entry : './src/scripts/app.js',
+      module : {
+        loaders : [{
+          test : /.js$/,
+          loader : 'babel-loader',
+          query : {
+            presets: ['es2015']
+          }
+        }]
+      }
     },
 
 

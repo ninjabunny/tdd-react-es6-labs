@@ -52,8 +52,7 @@ gulp.task('jasmine', function(done){
 
 gulp.task('karma', function() {
     return gulp.src([
-        'spec/**/*.js',
-        'src/**/*.js'
+        'spec/**/*.js'
         ],
         {'read': false}).pipe(
         karma.server({
