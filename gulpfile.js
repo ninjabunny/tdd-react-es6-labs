@@ -45,7 +45,7 @@ gulp.task('version', function(done) {
     done();
 });
 
-gulp.task('run', function(done) {
+gulp.task('run', function() {
     gulp.src('src')
         .pipe(webserver({
             livereload: true,
