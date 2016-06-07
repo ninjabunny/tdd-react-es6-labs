@@ -2,6 +2,7 @@ const gulp = require('gulp');
 const eslint = require('gulp-eslint');
 const jasmine = require('gulp-jasmine');
 const jshint = require('gulp-jshint');
+const karma = require('gulp-karma-runner');
 const reporters = require('jasmine-reporters');
 const webserver = require('gulp-webserver');
 const semver = require('semver');
@@ -34,7 +35,7 @@ gulp.task('eslint', function() {
         .pipe(eslint.failAfterError());
 });
 
-gulp.task('test', function(done){
+gulp.task('jasmine', function(done){
     gulp.src('spec/*.js')
         .pipe(jasmine({
             reporter: new reporters.TerminalReporter({
@@ -43,6 +44,32 @@ gulp.task('test', function(done){
             })
         }));
     done();
+});
+
+gulp.task('karma', function() {
+    return gulp.src([
+        'spec/**/*.js',
+        'src/**/*.js'
+        ],
+        {'read': false}).pipe(
+        karma.server({
+            configFile: __dirname + '/karma.conf.js',
+            'singleRun': false
+        })
+    )
+    });
+
+gulp.task('test', function() {
+    return gulp.src([
+        'spec/**/*.js',
+        'src/**/*.js'
+        ],
+        {'read': false}).pipe(
+        karma.runner({
+            configFile: __dirname + '/karma.conf.js',
+            'singleRun': false
+        })
+    )
 });
 
 gulp.task('version', function(done) {
