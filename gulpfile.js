@@ -4,6 +4,7 @@ const jasmine = require('gulp-jasmine');
 const jshint = require('gulp-jshint');
 const karma = require('gulp-karma-runner');
 const reporters = require('jasmine-reporters');
+const webpack = require('webpack-stream');
 const webserver = require('gulp-webserver');
 const semver = require('semver');
 
@@ -86,12 +87,18 @@ gulp.task('version', function(done) {
 });
 
 gulp.task('run', function() {
-    gulp.src('src')
+    gulp.src('dist')
         .pipe(webserver({
             livereload: true,
             open: true
         }));
 });
+
+gulp.task('webpack', function(){
+    return gulp.src('src/scripts/app.js')
+        .pipe(webpack(require('./webpack.config.js')))
+        .pipe(gulp.dest('dist/scripts/'));
+})
 
 //default task
 gulp.task('default', gulp.series(gulp.parallel('version', 'eslint'),'test',
