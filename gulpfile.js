@@ -7,6 +7,14 @@ gulp.task('jshint', function() {
     return gulp.src(['gulpfile.js', 'src/**/*.js'])
         .pipe(jshint({
             esversion: 6,
+            bitwise: true,
+            curly: true,
+            eqeqeq: true,
+            forin: true,
+            freeze: true,
+            latedef: 'nofunc',
+            nonbsp: true,
+            nonew: true,
             node: true,
             browser: true,
             globals: []
