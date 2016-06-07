@@ -1,6 +1,7 @@
 const gulp = require('gulp');
 const eslint = require('gulp-eslint');
 const jshint = require('gulp-jshint');
+const webserver = require('gulp-webserver');
 const semver = require('semver');
 
 gulp.task('jshint', function() {
@@ -42,6 +43,14 @@ gulp.task('version', function(done) {
         process.exit(1);
     }
     done();
+});
+
+gulp.task('run', function(done) {
+    gulp.src('src')
+        .pipe(webserver({
+            livereload: true,
+            open: true
+        }));
 });
 
 //default task
