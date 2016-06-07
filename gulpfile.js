@@ -56,7 +56,7 @@ gulp.task('karma', function() {
             configFile: __dirname + '/karma.conf.js',
             'singleRun': false
         })
-    )
+    );
     });
 
 gulp.task('test', function() {
@@ -69,7 +69,7 @@ gulp.task('test', function() {
             configFile: __dirname + '/karma.conf.js',
             'singleRun': false
         })
-    )
+    );
 });
 
 gulp.task('version', function(done) {
