@@ -1,6 +1,8 @@
 const gulp = require('gulp');
 const eslint = require('gulp-eslint');
+const jasmine = require('gulp-jasmine');
 const jshint = require('gulp-jshint');
+const reporters = require('jasmine-reporters');
 const webserver = require('gulp-webserver');
 const semver = require('semver');
 
@@ -32,6 +34,17 @@ gulp.task('eslint', function() {
         .pipe(eslint.failAfterError());
 });
 
+gulp.task('test', function(done){
+    gulp.src('spec/*.js')
+        .pipe(jasmine({
+            reporter: new reporters.TerminalReporter({
+                verbosity: 3,
+                color: true
+            })
+        }));
+    done();
+});
+
 gulp.task('version', function(done) {
     const packageJson = require('./package.json');
     const expectedVersion = packageJson.engines.node;
@@ -54,7 +67,7 @@ gulp.task('run', function() {
 });
 
 //default task
-gulp.task('default', gulp.series(gulp.parallel('version', 'eslint'),
+gulp.task('default', gulp.series(gulp.parallel('version', 'eslint'),'test',
     function(done){
         console.log('BUILD OK');
         done();
