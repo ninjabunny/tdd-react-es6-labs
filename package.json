@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "del": "^2.2.0",
     "eslint": "^2.11.1",
     "eslint-plugin-react": "^5.1.1",
     "gulp": "github:gulpjs/gulp#4.0",

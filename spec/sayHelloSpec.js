@@ -1,5 +1,13 @@
 var sayHello = require('../src/scripts/sayHello.js');
 
+beforeEach(function(){
+    var welcomeElement = '<h1 id="welcome-message"></h1>';
+    document.body.insertAdjacentHTML(
+        'afterbegin' ,
+        welcomeElement
+    );
+});
+
 describe('Greet', function() {
     it('concats Hello and a name', function() {
         var actual = sayHello.greet('World');
