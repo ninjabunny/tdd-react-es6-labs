@@ -13,6 +13,8 @@
   "license": "ISC",
   "devDependencies": {
     "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-jshint": "^2.0.1",
+    "jshint": "^2.9.2",
     "semver": "^5.1.0"
   }
 }
