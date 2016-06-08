@@ -36,6 +36,9 @@ module.exports = {
         ],
         "no-console": [
             "warn"
-        ]
+        ],
+        "react/jsx-uses-react": 1,
+        "react/jsx-uses-vars": 1,
+        "react/react-in-jsx-scope": 1
     }
 };

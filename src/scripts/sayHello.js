@@ -1,4 +1,9 @@
-export let greet = (name) => {
-    name = name ? name : 'Friend!';
-    return 'Hello, ' + name;
-};
+import React from 'react';
+
+class SayHello extends React.Component {
+    render() {
+        return (<h1>Hello, {this.props.name}!</h1>);
+    }
+}
+
+export default SayHello;
