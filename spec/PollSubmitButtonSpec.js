@@ -1,10 +1,10 @@
 import React from 'react';
 import TestUtils from 'react-addons-test-utils';
-import SayHello from '../src/scripts/SayHello.js';
+import PollSubmitButton from '../src/components/PollSubmitButton.js';
 
-describe('Greet', function() {
+describe('Poll Submit Button', function() {
     it('renders without problems', function() {
-        var sayhello = TestUtils.renderIntoDocument(<SayHello />);
-        expect(sayhello).toEqual(jasmine.anything());
+        var submitbutton = TestUtils.renderIntoDocument(<PollSubmitButton />);
+        expect(submitbutton).toEqual(jasmine.anything());
     });
 });
