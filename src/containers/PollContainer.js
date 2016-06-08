@@ -1,7 +1,6 @@
 import React from 'react';
 import PollHeader from '../components/PollHeader.js';
 import PollQuestion from '../components/PollQuestion.js';
-import PollAnswer from '../components/RadioButton.js';
 import PollSubmitButton from '../components/PollSubmitButton.js';
 import RadioButtonGroup from '../components/RadioButtonGroup.js';
 
@@ -21,7 +20,7 @@ class PollContainer extends React.Component {
         this.setState({
             checkedValue: value
         });
-        console.log("current choice: " + value);
+        //console.log('current choice: ' + value);
     }
 
     render() {
