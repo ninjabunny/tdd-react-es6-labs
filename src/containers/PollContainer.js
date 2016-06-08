@@ -1,8 +1,9 @@
 import React from 'react';
 import PollHeader from '../components/PollHeader.js';
 import PollQuestion from '../components/PollQuestion.js';
-import PollAnswer from '../components/PollAnswer.js';
+import PollAnswer from '../components/RadioButton.js';
 import PollSubmitButton from '../components/PollSubmitButton.js';
+import RadioButtonGroup from '../components/RadioButtonGroup.js';
 
 class PollContainer extends React.Component {
     constructor(props){
@@ -10,14 +11,26 @@ class PollContainer extends React.Component {
         this.state = {
             header: 'Welcome to the poll!',
             question: 'What is the best?',
-            answer1: 'Tacos',
-            answer2: 'Pizza',
-            answer3: 'Beer',
-            correctAnswer: 'Tacos'
+            correctAnswer: 'Tacos',
+            checkedValue: ''
         };
+        this.setCheckedValue = this.setCheckedValue.bind(this);
+    }
+    
+    setCheckedValue(value){
+        this.setState({
+            checkedValue: value
+        });
+        console.log("current choice: " + value);
     }
 
     render() {
+        const choices = [
+            {value: 'Tacos', label: 'Tacos'},
+            {value: 'Pizza', label: 'Pizza'},
+            {value: 'Cheese', label: 'Cheese'}
+        ];
+
         var rowStyle = {
             backgroundColor: '#dadada',
             border: '1px solid black',
@@ -34,9 +47,12 @@ class PollContainer extends React.Component {
                     <div className="col-sm-4 col-sm-offset-4">
                     <form>
                         <PollQuestion text={this.state.question} />
-                        <PollAnswer text={this.state.answer1}/>
-                        <PollAnswer text={this.state.answer2}/>
-                        <PollAnswer text={this.state.answer3}/>
+                            <RadioButtonGroup
+                                name = 'answer'
+                                checkedValue = {this.state.checkedValue}
+                                choices = {choices} 
+                                onChange = {this.setCheckedValue}
+                            />
                         <PollSubmitButton />
                     </form>
                     </div>

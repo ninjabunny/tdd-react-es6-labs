@@ -1,6 +1,6 @@
 import React from 'react';
 import TestUtils from 'react-addons-test-utils';
-import PollAnswer from '../src/components/PollAnswer.js';
+import PollAnswer from '../src/components/RadioButton.js';
 
 describe('Poll Answer', function() {
     var component;
