@@ -4,7 +4,7 @@ class PollAnswer extends React.Component{
     
     render(){
         return (
-            <div>
+            <div className="radio">
                 <label><input type="radio" /> <span>{this.props.text}</span></label>
             </div>
         );
