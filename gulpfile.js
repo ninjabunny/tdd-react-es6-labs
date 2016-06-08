@@ -113,12 +113,13 @@ gulp.task('webpack', function(){
         .pipe(gulp.dest(DIST + '/scripts/'));
 });
 
-gulp.task('build', gulp.series('clean', gulp.parallel('webpack' ,'copy'), 'run',
-    function(done) {
-        console.log('BUILD OK');
-        done();
-    }
-));
+gulp.task('watch', function() {
+    gulp.watch(['src/**/*.js','src/*.html'],
+        gulp.series('webpack','copy'));
+});
+
+gulp.task('build', gulp.series('clean', gulp.parallel('webpack' ,'copy'),
+    gulp.parallel('run' ,'watch')));
 
 //default task
 gulp.task('default', gulp.series(gulp.parallel('version', 'eslint'),'test',

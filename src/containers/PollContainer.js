@@ -12,7 +12,7 @@ class PollContainer extends React.Component {
             question: 'What is the best?',
             answer1: 'Tacos',
             answer2: 'Pizza',
-            answer3: 'Cheese',
+            answer3: 'Beer',
             correctAnswer: 'Tacos'
         };
     }
