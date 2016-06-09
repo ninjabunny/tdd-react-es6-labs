@@ -7,7 +7,7 @@ import PollSubmitButton from '../PollSubmitButton.js';
 
 describe('Poll Submit Button', function() {
 
-    it("renders without a problem", function () {
+    it('renders without a problem', function () {
 
         var pollsubmitbutton = TestUtils
             .renderIntoDocument(<div><PollSubmitButton /></div>);

@@ -33,6 +33,6 @@ RadioButtonGroup.propTypes = {
     checkedValue: React.PropTypes.string,
     choices: React.PropTypes.array,
     onChange: React.PropTypes.func
-}
+};
 
 export default RadioButtonGroup;
