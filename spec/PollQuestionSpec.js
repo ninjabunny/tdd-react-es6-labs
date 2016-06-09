@@ -1,17 +1,17 @@
 import React from 'react';
 import TestUtils from 'react-addons-test-utils';
 import PollQuestion from '../src/components/PollQuestion.js';
+import TestWrapper from '../src/components/TestWrapper.js';
 
 describe('Poll Question', function() {
     var component;
     beforeEach(function(){
         component = TestUtils.renderIntoDocument(
-            <PollQuestion text="What is the question?" />
+            <TestWrapper><PollQuestion text="What is the question?" /></TestWrapper>
         );
     });
     it('renders without problems', function() {
-        var pollquestion = TestUtils.renderIntoDocument(<PollQuestion />);
-        expect(pollquestion).toEqual(jasmine.anything());
+        expect(component).toEqual(jasmine.anything());
     });
 
     it('prints a message', function() {

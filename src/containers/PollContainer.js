@@ -3,14 +3,15 @@ import PollHeader from '../components/PollHeader.js';
 import PollQuestion from '../components/PollQuestion.js';
 import PollSubmitButton from '../components/PollSubmitButton.js';
 import RadioButtonGroup from '../components/RadioButtonGroup.js';
+import data from '../data/data.json';
 
 class PollContainer extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            header: 'Welcome to the poll!',
-            question: 'What is the best?',
-            correctAnswer: 'Tacos',
+            header: data.poll.header,
+            question: data.poll.questions[0].question,
+            correctAnswer: data.poll.questions[0].correctAnswer,
             checkedValue: ''
         };
         this.setCheckedValue = this.setCheckedValue.bind(this);
@@ -24,11 +25,7 @@ class PollContainer extends React.Component {
     }
 
     render() {
-        const choices = [
-            {value: 'Tacos', label: 'Tacos'},
-            {value: 'Pizza', label: 'Pizza'},
-            {value: 'Cheese', label: 'Cheese'}
-        ];
+        const choices = data.poll.questions[0].choices;
 
         var rowStyle = {
             backgroundColor: '#dadada',

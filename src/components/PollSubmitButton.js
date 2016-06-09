@@ -1,6 +1,6 @@
 import React from 'react';
 
-function PollSubmitButton(props){
+function PollSubmitButton(){
     return (
         <button className="btn btn-success">Go!</button>
     );

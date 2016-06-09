@@ -1,10 +1,14 @@
+/* eslint-disable */
+
 module.exports = {
     entry: './src/scripts/app.js',
     output: {
         filename: 'app.js'
     },
     module : {
-        loaders: [ {
+        loaders : [
+            {test: /\.json$/, loader: 'json' },
+            {
             test : /.js$/,
             loader : 'babel-loader',
             query : {
