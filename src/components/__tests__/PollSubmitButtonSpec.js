@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 jest.dontMock('../PollSubmitButton');
 
 import React from 'react';
