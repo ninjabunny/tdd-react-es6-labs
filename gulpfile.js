@@ -103,8 +103,10 @@ gulp.task('clean', function() {
     ]);
 });
 
-gulp.task('copy', function() {
-    return gulp.src('src/*.html').pipe(gulp.dest(DIST));
+gulp.task('copy', function(done) {
+    gulp.src('src/*.html').pipe(gulp.dest(DIST));
+    gulp.src('src/data/*').pipe(gulp.dest(DIST+"/data"));
+    done();
 });
 
 gulp.task('webpack', function(){

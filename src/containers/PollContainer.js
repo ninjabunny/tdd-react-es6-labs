@@ -3,15 +3,16 @@ import PollHeader from '../components/PollHeader.js';
 import PollQuestion from '../components/PollQuestion.js';
 import PollSubmitButton from '../components/PollSubmitButton.js';
 import RadioButtonGroup from '../components/RadioButtonGroup.js';
-import data from '../data/data.json';
+import $ from 'jquery';
 
 class PollContainer extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            header: data.poll.header,
-            question: data.poll.questions[0].question,
-            correctAnswer: data.poll.questions[0].correctAnswer,
+            header: '',
+            question: '',
+            correctAnswer: '',
+            choices: [],
             checkedValue: ''
         };
         this.setCheckedValue = this.setCheckedValue.bind(this);
@@ -24,8 +25,39 @@ class PollContainer extends React.Component {
         //console.log('current choice: ' + value);
     }
 
+    componentWillMount() {
+        console.log('componentWillMount()');
+    }
+    componentDidMount(){
+        console.log('componentDidMount');
+        this.serverRequest = $.get('http://localhost:8000/data/data.json', function (result) {
+            var data = result;
+            this.setState({
+                header: data.poll.header,
+                question: data.poll.questions[0].question,
+                choices: data.poll.questions[0].choices,
+                correctAnswer: data.poll.questions[0].correctAnswer
+            });
+        }.bind(this));
+    }
+    componentWillReceiveProps() {
+        console.log('componentWillReceiveProps()');
+    }
+    shouldComponentUpdate() {
+        console.log('shouldComponentUpdate()');
+        return true;
+    }
+    componentWillUpdate() {
+        console.log('componentWillUpdate()');
+    }
+    componentDidUpdate() {
+        console.log('componentDidUpdate()');
+    }
+    componentWillUnmount() {
+        console.log('componentWillUnmount()');
+    }
+
     render() {
-        const choices = data.poll.questions[0].choices;
 
         var rowStyle = {
             backgroundColor: '#dadada',
@@ -46,7 +78,7 @@ class PollContainer extends React.Component {
                             <RadioButtonGroup
                                 name = 'answer'
                                 checkedValue = {this.state.checkedValue}
-                                choices = {choices} 
+                                choices = {this.state.choices}
                                 onChange = {this.setCheckedValue}
                             />
                         <PollSubmitButton />
