@@ -93,7 +93,7 @@ class PollContainer extends React.Component {
                         choices={question.choices}
                         onChange = {this.setCheckedValue} />
                 </div>
-            )
+            );
 
         }.bind(this));
 
