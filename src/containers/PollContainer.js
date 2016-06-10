@@ -5,19 +5,43 @@ import RadioButtonGroup from '../components/RadioButtonGroup';
 import PollSubmitButton from '../components/PollSubmitButton.js';
 import $ from 'jQuery';
 
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+
+import selector from '../reducers';
+
+var header = "";
+var questions = [];
+var choices = [];
+var correctAnswer = [];
+var numberOfQuestions;
+
+//store
+const store = createStore(selector);
+
+//action type
+const SELECT = 'SELECT';
+
+//action creator
+function checkTheBox(name,value){
+    return {
+        type: SELECT,
+        name,
+        value
+    }
+}
+
 class PollContainer extends React.Component {
     constructor(props){
         super(props);
-        this.state = {
-            checkedValue: [],
-            header: '',
-            questions: [],
-            choices: [],
-            numberOfQuestions: ''
-        };
 
+        this.state = {
+            checkedValue: []
+         };
         this.setCheckedValue = this.setCheckedValue.bind(this);
+
     }
+
 
     setCheckedValue(name,value){
         var newChecked = this.state.checkedValue.slice(0,this.state.numberOfQuestions);
@@ -28,8 +52,8 @@ class PollContainer extends React.Component {
         });
     }
 
-    checkAnswer(value){
-        if (value===this.state.correctAnswer){
+    checkAnswer(name,value){
+        if (value===correctAnswer[name]){
             console.log('correct');
         }
     }
@@ -44,14 +68,12 @@ class PollContainer extends React.Component {
     componentDidMount(){
         console.log('componentDidMount');
         this.serverRequest = $.get('http://localhost:8000/data/data.json', function (result) {
-            this.setState({
-                header: result.poll.header,
-                questions: result.poll.questions,
-                choices: result.poll.questions[0].choices,
-                correctAnswer: result.poll.questions[0].correctAnswer,
-                numberOfQuestions: result.poll.questions.length
-            });
-        }.bind(this));
+            header = result.poll.header;
+            questions = result.poll.questions;
+            choices = result.poll.questions[0].choices;
+            correctAnswer = result.poll.questions[0].correctAnswer;
+            numberOfQuestions= result.poll.questions.length;
+            }.bind(this));
     }
 
 
@@ -74,7 +96,6 @@ class PollContainer extends React.Component {
     }
 
     render(){
-
         var rowStyle = {
             backgroundColor: '#dadada',
             border: '1px solid black',
@@ -82,17 +103,24 @@ class PollContainer extends React.Component {
             padding: '10px'
         };
 
-        var questionsArray = this.state.questions;
+        
+        store.subscribe(() => {
+            this.setState({checkedValue: store.getState()});
+        });
+        
+        var questionsArray = questions;
         var questionsOutput = questionsArray.map(function(question,questionNumber){
             return (
+                <Provider store={store}>
                 <div key={`question-number-${questionNumber}`}>
                     <PollQuestion text={question.question} />
                     <RadioButtonGroup
                         name={questionNumber}
                         checkedValue={this.state.checkedValue[questionNumber]}
                         choices={question.choices}
-                        onChange = {this.setCheckedValue} />
+                        onChange = {store.dispatch(checkTheBox(questionNumber,this.state.checkedValue[questionNumber]))} />
                 </div>
+                </Provider>
             );
 
         }.bind(this));
@@ -100,7 +128,7 @@ class PollContainer extends React.Component {
         return (
             <div className="container">
                 <div className="jumbotron">
-                    <PollHeader text={this.state.header} />
+                    <PollHeader text={header} />
                 </div>
                 <div className="row" style={rowStyle}>
                     <div className="col-sm-4 col-sm-offset-4">
