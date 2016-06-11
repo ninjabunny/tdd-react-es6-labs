@@ -1,13 +1,17 @@
 {
   "name": "react-training",
-  "version": "1.0.0",
-  "description": "React Project Template with automated build.",
+  "version": "1.1.0",
+  "description": "Lab files for TDD with React and ES6 by Chris Minnick",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/watzthisco/tdd-react-es6-labs.git"
+  },
   "engines": {
     "node": "4.4.2"
   },
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/gulp jest"
   },
   "author": "",
   "license": "ISC",
