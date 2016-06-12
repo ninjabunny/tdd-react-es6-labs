@@ -1,4 +1,4 @@
-# React Project Template
+# TDD with React and ES6
 
 Completed Labs for TDD with React and ES6 by Chris Minnick
 
