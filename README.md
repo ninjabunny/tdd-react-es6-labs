@@ -1,6 +1,21 @@
 # React Project Template
 
-React Project Template with automated build.
+Completed Labs for TDD with React and ES6 by Chris Minnick
+
+## About the Repo
+
+You can clone the entire repository by running the command:
+
+`git clone https://github.com/watzthisco/tdd-react-es6-labs`
+
+This will create a new directory called tdd-react-es6-labs. Changing into this directory with this command:
+
+`cd tdd-react-es6-labs`
+
+Each lab in the course (starting with Lab 6) is in its own branch. The branches are named in labxx format.
+To see the finished files for Lab 6, for example, run this command:
+
+`git checkout lab06`
 
 ## Installation
 
