@@ -63,7 +63,7 @@ class PollContainer extends React.Component {
 
         
 
-        
+
         var questionsOutput = questions.map(function(question,questionNumber){
             return (
                 <div key={`question-number-${questionNumber}`}>
