@@ -1,26 +1,38 @@
-/* eslint-disable */
+'use strict';
 
-module.exports = {
-    entry: './src/scripts/app.js',
-    output: {
-        filename: 'app.js'
-    },
-    module : {
-        loaders : [
-            {test: /\.json$/, loader: 'json' },
-            {
-            test : /.js$/,
-            loader : 'babel-loader',
-            query : {
-                presets: ['es2015','react']
-            }
-        }]
-    }/*,
-    plugins: [
-        new webpack.DefinePlugin({
-            'process.env': {
-                'NODE_ENV': '"production"'
-            }
-        })
-    ]*/
+var webpack = require('webpack')
+
+var env = process.env.NODE_ENV
+var config = {
+  module: {
+    loaders: [
+      { test: /\.js$/, loaders: ['babel-loader'], exclude: /node_modules/ }
+    ]
+  },
+  output: {
+    library: 'Redux',
+    libraryTarget: 'umd'
+  },
+  plugins: [
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(env)
+    })
+  ]
 };
+
+if (env === 'production') {
+  config.plugins.push(
+    new webpack.optimize.UglifyJsPlugin({
+      compressor: {
+        pure_getters: true,
+        unsafe: true,
+        unsafe_comps: true,
+        screw_ie8: true,
+        warnings: false
+      }
+    })
+  )
+}
+
+module.exports = config
