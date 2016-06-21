@@ -4,11 +4,10 @@ import PollQuestion from '../components/PollQuestion';
 import RadioButtonGroup from '../components/RadioButtonGroup';
 import PollSubmitButton from '../components/PollSubmitButton.js';
 import $ from 'jQuery';
+import {selectAnswer} from '../actions';
 
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
+import { connect } from 'react-redux';
 
-import selector from '../reducers';
 
 var header = "";
 var questions = [];
@@ -16,31 +15,10 @@ var choices = [];
 var correctAnswer = [];
 var numberOfQuestions;
 
-//store
-const store = createStore(selector);
 
-//action type
-const SELECT = 'SELECT';
 
-//action creator
-function checkTheBox(name,value){
-    return {
-        type: SELECT,
-        name,
-        value
-    }
-}
 
 class PollContainer extends React.Component {
-    constructor(props){
-        super(props);
-
-        this.state = {
-            checkedValue: []
-         };
-        this.setCheckedValue = this.setCheckedValue.bind(this);
-
-    }
 
 
     setCheckedValue(name,value){
@@ -61,10 +39,6 @@ class PollContainer extends React.Component {
 
 
 
-    componentWillMount() {
-        console.log('componentWillMount()');
-    }
-
     componentDidMount(){
         console.log('componentDidMount');
         this.serverRequest = $.get('http://localhost:8000/data/data.json', function (result) {
@@ -77,23 +51,7 @@ class PollContainer extends React.Component {
     }
 
 
-    componentWillReceiveProps() {
-        console.log('componentWillReceiveProps()');
-    }
-    shouldComponentUpdate() {
-        console.log('shouldComponentUpdate()');
-        return true;
-    }
-    componentWillUpdate() {
-        console.log('componentWillUpdate()');
-    }
-    componentDidUpdate(){
-        console.log('componentDidUpdate');
-        this.checkAnswer(this.state.checkedValue);
-    }
-    componentWillUnmount() {
-        console.log('componentWillUnmount()');
-    }
+
 
     render(){
         var rowStyle = {
@@ -104,28 +62,27 @@ class PollContainer extends React.Component {
         };
 
         
-        store.subscribe(() => {
-            this.setState({checkedValue: store.getState()});
-        });
+
         
-        var questionsArray = questions;
-        var questionsOutput = questionsArray.map(function(question,questionNumber){
+        var questionsOutput = questions.map(function(question,questionNumber){
             return (
-                <Provider store={store}>
                 <div key={`question-number-${questionNumber}`}>
                     <PollQuestion text={question.question} />
                     <RadioButtonGroup
                         name={questionNumber}
-                        checkedValue={this.state.checkedValue[questionNumber]}
+                        checkedValue={this.props.checkedValue[questionNumber]}
                         choices={question.choices}
-                        onChange = {store.dispatch(checkTheBox(questionNumber,this.state.checkedValue[questionNumber]))} />
+                        onChange = {() => {
+                       this.props.selectAnswer(this.props.checkedValue[questionNumber])}}
+
+                       />
                 </div>
-                </Provider>
             );
 
         }.bind(this));
 
         return (
+
             <div className="container">
                 <div className="jumbotron">
                     <PollHeader text={header} />
@@ -140,10 +97,28 @@ class PollContainer extends React.Component {
                 </div>
 
             </div>
+
         );
     }
 
 }
 
 
-export default PollContainer;
+
+function mapStateToProps(state){
+    return {
+        checkedValue:state.checkedValue
+    }
+}
+function mapDispatchToProps(dispatch) {
+    return {
+        selectAnswer: function (value) {
+            return dispatch(selectAnswer(value));
+        }
+    };
+}
+
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps)(PollContainer);
