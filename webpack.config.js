@@ -1,26 +1,24 @@
-/* eslint-disable */
-
 module.exports = {
-    entry: './src/scripts/app.js',
-    output: {
-        filename: 'app.js'
+    entry  : './src/scripts/app.js',
+    output : {
+        filename : 'app.js'
     },
     module : {
-        loaders : [
-            {test: /\.json$/, loader: 'json' },
-            {
-            test : /.js$/,
+        loaders: [ {
+            test   : /.js$/,
             loader : 'babel-loader',
-            query : {
-                presets: ['es2015','react']
+            query: {
+                presets: ['es2015','react','stage-2']
             }
-        }]
+        }
+        ]
     }/*,
-    plugins: [
-        new webpack.DefinePlugin({
-            'process.env': {
-                'NODE_ENV': '"production"'
-            }
-        })
-    ]*/
+     plugins: [
+     new webpack.DefinePlugin({
+     'process.env': {
+     'NODE_ENV': '"production"'
+     }
+     })
+     ]*/
+
 };

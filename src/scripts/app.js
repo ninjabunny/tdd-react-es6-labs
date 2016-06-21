@@ -1,18 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Router, Route, hashHistory} from 'react-router';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import swimCalc from '../reducers';
 
-import App from '../containers/App';
-import PollContainer from '../containers/PollContainer';
-import AboutUs from '../components/AboutUs';
+function configureStore(initialState) {
+    const store = createStore(swimCalc, initialState,
+        window.devToolsExtension && window.devToolsExtension()
+    );
+    return store;
+}
+
+let store = configureStore();
+
+import PageContainer from '../containers/PageContainer';
+
+const render = () => {
+    ReactDOM.render(<Provider store={store}>
+            <PageContainer/>
+        </Provider>,
+        document.getElementById('app'));
+};
 
 
-ReactDOM.render((
-    <Router history={hashHistory}>
-        <Route path="/" component={App}>
-            <Route path="poll" component={PollContainer} />
-            <Route path="about" component={AboutUs} />
-        </Route>
-    </Router>),
-    document.getElementById('app')
-);
+store.subscribe(render);
+render();

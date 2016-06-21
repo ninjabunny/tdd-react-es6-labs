@@ -1,9 +1,10 @@
 {
-  "name": "react-training",
+  "name": "hl-react",
   "version": "1.0.0",
-  "description": "React Project Template with automated build.",
-  "engines": {
-    "node": "4.4.2"
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/watzthisco/nightcode-react.git"
   },
   "main": "index.js",
   "scripts": {
@@ -12,46 +13,22 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "babel-core": "^6.9.1",
-    "babel-jest": "^12.1.0",
+    "babel-core": "^6.8.0",
     "babel-loader": "^6.2.4",
-    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-es2015": "^6.6.0",
     "babel-preset-react": "^6.5.0",
     "del": "^2.2.0",
-    "eslint": "^2.11.1",
-    "eslint-plugin-react": "^5.1.1",
     "gulp": "github:gulpjs/gulp#4.0",
-    "gulp-eslint": "^2.0.0",
-    "gulp-jasmine": "^2.3.0",
-    "gulp-jshint": "^2.0.1",
-    "gulp-karma-runner": "^1.1.11",
+    "gulp-cli": "github:gulpjs/gulp-cli#4.0",
+    "webpack-stream": "^3.2.0",
     "gulp-webserver": "^0.9.1",
-    "jasmine": "^2.4.1",
-    "jasmine-reporters": "^2.1.1",
-    "jest": "^12.1.1",
-    "jest-cli": "^12.1.1",
-    "jshint": "^2.9.2",
-    "json-loader": "^0.5.4",
-    "karma": "^0.13.22",
-    "karma-chrome-launcher": "^1.0.1",
-    "karma-commonjs": "^1.0.0",
-    "karma-jasmine": "^1.0.2",
-    "karma-webpack": "^1.7.0",
-    "react-addons-test-utils": "^15.1.0",
-    "semver": "^5.1.0",
-    "webpack": "^1.13.1",
-    "webpack-stream": "^3.2.0"
+    "webpack": "^1.13.0"
   },
   "dependencies": {
-    "jquery": "^2.2.4",
-    "react": "^15.1.0",
-    "react-dom": "^15.1.0",
-    "react-router": "^2.4.1"
-  },
-  "jest": {
-    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
-    "unmockedModulePathPatterns": [
-      "<rootDir>/node_modules/react"
-    ]
+    "babel-preset-stage-2": "^6.5.0",
+    "react": "^15.0.2",
+    "react-dom": "^15.0.2",
+    "react-redux": "^4.4.5",
+    "redux": "^3.5.2"
   }
 }

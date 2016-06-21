@@ -1,37 +1,22 @@
-# React Project Template
+# learning react
 
-React Project Template with automated build.
+## Demo Project
 
-## Installation
+### Background
+Linda is a distance swimmer. Each month, she buys a lap swim pass from the city Department of 
+Parks and Recreation that gets her 20 entries to the pool and is only good for one month. 
 
-1. Install Node
-2. Install git
-3. In the console, type: npm install
+The current cost of the pass is $50.
 
-## Usage
+The first time she swims each month, she swims 1 kilometer (1000 meters). She increases her distance by 100 
+meters each time she swims during the month
 
-### Building
+Build an app that will tell Linda:
+- How far she will have swum if she swims 20 times
+- What is her price per kilometer swum
+- What do the numbers look like if any of the variables in the equation change:
+-- Price for the lap swim pass
+-- Number of times she uses the pass in a month
+-- Starting distance
+-- Daily increase in distance
 
-1. gulp build
-
-### Testing
-
-To Lint:
-
-Use 'gulp jshint' for JSHint
-Use 'gulp eslint' for ESLint
-
-Run unit tests in Karma
-
-1. Start Karma server: gulp karma
-2. Open some browsers and go to http://localhost:9876 in each
-3. gulp test
-
-Run unit tests in the console:
-1. gulp jasmine
-
-## Credits
-written by Chris Minnick, copyright 2016, WatzThis?
-
-## License
-http://creativecommons.org/licenses/by-nc/4.0
