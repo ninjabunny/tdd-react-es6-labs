@@ -25,7 +25,7 @@ class RadioButtonGroup extends React.Component{
                 <CurrentChoice checked = {this.props.checkedValue} />
             </div>
         );
-    }
+    };
 }
 
 RadioButtonGroup.propTypes = {
