@@ -2,6 +2,10 @@
   "name": "react-training",
   "version": "1.0.0",
   "description": "React Project Template with automated build.",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/watzthisco/tdd-react-es6-labs"
+  },
   "engines": {
     "node": "4.4.2"
   },
