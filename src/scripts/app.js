@@ -3,10 +3,14 @@ import ReactDOM from 'react-dom';
 import {Router, Route, hashHistory} from 'react-router';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import selector from '../reducers';
+import rootReducer from '../reducers';
+
+const initialState = {
+    selections: []
+};
 
 function configureStore(initialState) {
-    const store = createStore(selector, initialState,
+    const store = createStore(rootReducer, initialState,
         window.devToolsExtension && window.devToolsExtension()
     );
     return store;

@@ -4,12 +4,12 @@ import PollQuestion from '../components/PollQuestion';
 import RadioButtonGroup from '../components/RadioButtonGroup';
 import PollSubmitButton from '../components/PollSubmitButton.js';
 import $ from 'jQuery';
-import {selectAnswer} from '../actions';
-
+import * as actions from '../actions';
 import { connect } from 'react-redux';
+import {bindActionCreators} from 'redux';
 
 
-var header = "";
+var header = '';
 var questions = [];
 var choices = [];
 var correctAnswer = [];
@@ -70,10 +70,9 @@ class PollContainer extends React.Component {
                     <PollQuestion text={question.question} />
                     <RadioButtonGroup
                         name={questionNumber}
-                        checkedValue={this.props.checkedValue[questionNumber]}
+                        checkedValue={this.props.selections[questionNumber]}
                         choices={question.choices}
-                        onChange = {() => {
-                       this.props.selectAnswer(this.props.checkedValue[questionNumber])}}
+                        onChange = {this.props.actions.selectAnswer}
 
                        />
                 </div>
@@ -107,15 +106,13 @@ class PollContainer extends React.Component {
 
 function mapStateToProps(state){
     return {
-        checkedValue:state.checkedValue
-    }
+        selections:state.selections
+    };
 }
 function mapDispatchToProps(dispatch) {
     return {
-        selectAnswer: function (value) {
-            return dispatch(selectAnswer(value));
+        actions: bindActionCreators(actions,dispatch)
         }
-    };
 }
 
 
