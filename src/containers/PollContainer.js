@@ -11,9 +11,7 @@ class PollContainer extends React.Component {
         this.state = {
             checkedValue: [],
             header: '',
-            questions: [],
-            choices: [],
-            numberOfQuestions: ''
+            questions: []
         };
 
         this.setCheckedValue = this.setCheckedValue.bind(this);
@@ -34,13 +32,6 @@ class PollContainer extends React.Component {
         }
     }
 
-
-
-
-    componentWillMount() {
-        console.log('componentWillMount()');
-    }
-
     componentDidMount(){
         console.log('componentDidMount');
         this.serverRequest = $.get('http://localhost:8000/data/data.json', function (result) {
@@ -51,24 +42,6 @@ class PollContainer extends React.Component {
         }.bind(this));
     }
 
-
-    componentWillReceiveProps() {
-        console.log('componentWillReceiveProps()');
-    }
-    shouldComponentUpdate() {
-        console.log('shouldComponentUpdate()');
-        return true;
-    }
-    componentWillUpdate() {
-        console.log('componentWillUpdate()');
-    }
-    componentDidUpdate(){
-        console.log('componentDidUpdate');
-        this.checkAnswer(this.state.checkedValue);
-    }
-    componentWillUnmount() {
-        console.log('componentWillUnmount()');
-    }
 
     render(){
 
