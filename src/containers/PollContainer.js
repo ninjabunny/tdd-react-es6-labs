@@ -20,7 +20,7 @@ class PollContainer extends React.Component {
     }
 
     setCheckedValue(name,value){
-        var newChecked = this.state.checkedValue.slice(0,this.state.numberOfQuestions);
+        var newChecked = this.state.checkedValue.slice(0,this.state.questions.length);
         newChecked[name] = value;
 
         this.setState({
@@ -46,10 +46,7 @@ class PollContainer extends React.Component {
         this.serverRequest = $.get('http://localhost:8000/data/data.json', function (result) {
             this.setState({
                 header: result.poll.header,
-                questions: result.poll.questions,
-                choices: result.poll.questions[0].choices,
-                correctAnswer: result.poll.questions[0].correctAnswer,
-                numberOfQuestions: result.poll.questions.length
+                questions: result.poll.questions
             });
         }.bind(this));
     }
@@ -82,14 +79,14 @@ class PollContainer extends React.Component {
             padding: '10px'
         };
 
-        var questionsArray = this.state.questions;
-        var questionsOutput = questionsArray.map(function(question,questionNumber){
+        var {questions,checkedValue,header} = this.state;
+        var questionsOutput = questions.map(function(question,questionNumber){
             return (
                 <div key={`question-number-${questionNumber}`}>
                     <PollQuestion text={question.question} />
                     <RadioButtonGroup
                         name={questionNumber}
-                        checkedValue={this.state.checkedValue[questionNumber]}
+                        checkedValue={checkedValue[questionNumber]}
                         choices={question.choices}
                         onChange = {this.setCheckedValue} />
                 </div>
@@ -100,7 +97,7 @@ class PollContainer extends React.Component {
         return (
             <div className="container">
                 <div className="jumbotron">
-                    <PollHeader text={this.state.header} />
+                    <PollHeader text={header} />
                 </div>
                 <div className="row" style={rowStyle}>
                     <div className="col-sm-4 col-sm-offset-4">
