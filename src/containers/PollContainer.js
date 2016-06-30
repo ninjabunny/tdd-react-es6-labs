@@ -15,6 +15,8 @@ class PollContainer extends React.Component {
         };
 
         this.setCheckedValue = this.setCheckedValue.bind(this);
+        this.checkAnswers = this.checkAnswers.bind(this);
+
     }
 
     setCheckedValue(name,value){
@@ -26,10 +28,10 @@ class PollContainer extends React.Component {
         });
     }
 
-    checkAnswer(value){
-        if (value===this.state.correctAnswer){
-            console.log('correct');
-        }
+    checkAnswers(e){
+        e.preventDefault();
+        console.log('checking');
+
     }
 
     componentDidMount(){
@@ -74,7 +76,7 @@ class PollContainer extends React.Component {
                 </div>
                 <div className="row" style={rowStyle}>
                     <div className="col-sm-4 col-sm-offset-4">
-                        <form>
+                        <form onSubmit={this.checkAnswers}>
                             {questionsOutput}
                             <PollSubmitButton />
                         </form>
