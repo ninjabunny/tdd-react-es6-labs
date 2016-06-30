@@ -20,7 +20,7 @@ class PollContainer extends React.Component {
     }
 
     setCheckedValue(name,value){
-        var newChecked = this.state.checkedValue.slice(0,this.state.questions.length);
+        var newChecked = this.state.checkedValue;
         newChecked[name] = value;
 
         this.setState({
