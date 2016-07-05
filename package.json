@@ -30,6 +30,7 @@
     "gulp-jshint": "^2.0.1",
     "gulp-karma-runner": "^1.1.11",
     "gulp-webserver": "^0.9.1",
+    "handlebars": "^4.0.5",
     "jasmine": "^2.4.1",
     "jasmine-reporters": "^2.1.1",
     "jest": "^12.1.1",
