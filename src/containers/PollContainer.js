@@ -9,24 +9,36 @@ import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
 
 
-var header = '';
-var questions = [];
-var choices = [];
-var correctAnswer = [];
-var numberOfQuestions;
-
-
-
-
 class PollContainer extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            checkedValue: [],
+            header: '',
+            questions: [],
+            choices: [],
+            numberOfQuestions: ''
+        };
+    }
 
+    callAjax() {
+        $.get('http://localhost:8000/data/data.json', function (result) {
+            this.setState({
+                header: result.poll.header,
+                questions: result.poll.questions,
+                choices: result.poll.questions[0].choices,
+                correctAnswer: result.poll.questions[0].correctAnswer,
+                numberOfQuestions: result.poll.questions.length,
+                checkedValue:''
+            });
+        }.bind(this));
+    }
 
     setCheckedValue(name,value){
         var newChecked = this.state.checkedValue.slice(0,this.state.numberOfQuestions);
         newChecked[name] = value;
-
         this.setState({
-            checkedValue: newChecked
+            checkedValue: newChecked,
         });
     }
 
@@ -36,20 +48,25 @@ class PollContainer extends React.Component {
         }
     }
 
+    componentWillMount() {
+        console.log('componentWillMount');
 
-
-
+        this.callAjax();
+    }
     componentDidMount(){
         console.log('componentDidMount');
-        this.serverRequest = $.get('http://localhost:8000/data/data.json', function (result) {
-            header = result.poll.header;
-            questions = result.poll.questions;
-            choices = result.poll.questions[0].choices;
-            correctAnswer = result.poll.questions[0].correctAnswer;
-            numberOfQuestions= result.poll.questions.length;
-            }.bind(this));
+        //this.callAjax();
+
+
+
     }
 
+
+
+    componentWillUpdate(nextProps, nextState) {
+        console.log('componentWillUpdate');
+
+    }
 
 
 
@@ -61,10 +78,10 @@ class PollContainer extends React.Component {
             padding: '10px'
         };
 
-        
 
 
-        var questionsOutput = questions.map(function(question,questionNumber){
+
+        var questionsOutput = this.state.questions.map(function(question,questionNumber){
             return (
                 <div key={`question-number-${questionNumber}`}>
                     <PollQuestion text={question.question} />
@@ -81,10 +98,9 @@ class PollContainer extends React.Component {
         }.bind(this));
 
         return (
-
             <div className="container">
                 <div className="jumbotron">
-                    <PollHeader text={header} />
+                    <PollHeader text={this.state.header} />
                 </div>
                 <div className="row" style={rowStyle}>
                     <div className="col-sm-4 col-sm-offset-4">
@@ -94,7 +110,6 @@ class PollContainer extends React.Component {
                         </form>
                     </div>
                 </div>
-
             </div>
 
         );
