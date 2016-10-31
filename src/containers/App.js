@@ -6,9 +6,9 @@ class App extends React.Component {
         return(
             <div>
                 <ul className = "nav nav-pills">
-                    <li role="presentation" class="active"><Link to="/">Home</Link></li>
-                    <li role="presentation" class="active"><Link to="poll">Poll</Link></li>
-                    <li role="presentation" class="active"><Link to="about">About Us</Link></li>
+                    <li role="presentation" className="active"><Link to="/">Home</Link></li>
+                    <li role="presentation" className="active"><Link to="poll">Poll</Link></li>
+                    <li role="presentation" className="active"><Link to="about">About Us</Link></li>
                 </ul>
                 <div>
                     {this.props.children}
