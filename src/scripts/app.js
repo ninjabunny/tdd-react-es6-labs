@@ -1,18 +1,20 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {Router, Route, hashHistory} from 'react-router';
+
+import { render } from 'react-dom';
+import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 
 import App from '../containers/App';
 import PollContainer from '../containers/PollContainer';
 import AboutUs from '../components/AboutUs';
 
-
-ReactDOM.render((
-    <Router history={hashHistory}>
+const router = (
+    <Router history = {browserHistory}>
         <Route path="/" component={App}>
-            <Route path="poll" component={PollContainer} />
-            <Route path="about" component={AboutUs} />
+            <IndexRoute component={PollContainer} />
+            <Route path="/about" component={AboutUs} />
         </Route>
-    </Router>),
-    document.getElementById('app')
+    </Router>
 );
+
+
+render(router, document.getElementById('app'));
