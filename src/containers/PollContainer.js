@@ -19,6 +19,18 @@ class PollContainer extends React.Component {
         this.setCheckedValue = this.setCheckedValue.bind(this);
     }
 
+    callAjax() {
+        $.get('http://localhost:8000/data/data.json', function (result) {
+            this.setState({
+                header: result.poll.header,
+                questions: result.poll.questions,
+                choices: result.poll.questions[0].choices,
+                correctAnswer: result.poll.questions[0].correctAnswer,
+                numberOfQuestions: result.poll.questions.length
+            });
+        }.bind(this));
+    }
+
     setCheckedValue(name,value){
         var newChecked = this.state.checkedValue.slice(0,this.state.numberOfQuestions);
         newChecked[name] = value;
@@ -35,23 +47,13 @@ class PollContainer extends React.Component {
     }
 
 
-
-
     componentWillMount() {
         console.log('componentWillMount()');
     }
 
     componentDidMount(){
         console.log('componentDidMount');
-        this.serverRequest = $.get('http://localhost:8000/data/data.json', function (result) {
-            this.setState({
-                header: result.poll.header,
-                questions: result.poll.questions,
-                choices: result.poll.questions[0].choices,
-                correctAnswer: result.poll.questions[0].correctAnswer,
-                numberOfQuestions: result.poll.questions.length
-            });
-        }.bind(this));
+        this.callAjax();
     }
 
 
