@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
-import pollData from './pollData';
+import questions from './questions';
 import checkedValue from './checkedValue';
 
-const rootReducer = combineReducers({pollData,checkedValue,routing:routerReducer});
+const rootReducer = combineReducers({questions,checkedValue,routing:routerReducer});
 
 export default rootReducer;
