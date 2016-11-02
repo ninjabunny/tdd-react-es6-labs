@@ -7,6 +7,9 @@ import App from '../containers/App';
 import PollContainer from '../containers/PollContainer';
 import AboutUs from '../components/AboutUs';
 
+import { Provider } from 'react-redux';
+import store, { history } from './store';
+
 const router = (
     <Router history = {browserHistory}>
         <Route path="/" component={App}>
