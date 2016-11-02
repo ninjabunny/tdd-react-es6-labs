@@ -12,5 +12,10 @@ var pollData = fetch(myRequest).then (function(response){
     return response.json();
 });
 
+//create an object for the default data
 
+const defaultState = {
+    pollData,
+    checkedValue: []
+};
 
