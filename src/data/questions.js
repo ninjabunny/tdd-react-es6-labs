@@ -15,6 +15,17 @@ const questions = [
     {"value": "Blue", "label": "Blue"}
   ],
   "correctAnswer": "Blue"
+},
+{
+  "question": "What day is it?:",
+  "choices": [
+    {"value": "Monday", "label": "Monday"},
+    {"value": "Tuesday", "label": "Tuesday"},
+    {"value": "Wednesday", "label": "Wednesday"},
+    {"value": "Thursday", "label": "Thursday"},
+    {"value": "Friday", "label": "Friday"}
+  ],
+  "correctAnswer": "Friday"
 }
 ];
 

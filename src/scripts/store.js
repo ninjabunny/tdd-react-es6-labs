@@ -11,7 +11,7 @@ import questions from '../data/questions.js';
 
 const defaultState = {
     questions,
-    checkedValue: []
+    checkedValue: new Array(questions.length)
 };
 
 const store = createStore(rootReducer, defaultState,

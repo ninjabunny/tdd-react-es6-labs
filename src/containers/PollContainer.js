@@ -3,10 +3,12 @@ import PollHeader from '../components/PollHeader';
 import PollQuestion from '../components/PollQuestion';
 import RadioButtonGroup from '../components/RadioButtonGroup';
 import PollSubmitButton from '../components/PollSubmitButton.js';
+/*
 import $ from 'jQuery';
+*/
 
 class PollContainer extends React.Component {
-    constructor(props){
+/*    constructor(props){
         super(props);
         this.state = {
             checkedValue: [],
@@ -17,9 +19,9 @@ class PollContainer extends React.Component {
         };
 
         this.setCheckedValue = this.setCheckedValue.bind(this);
-    }
+    }*/
 
-    callAjax() {
+/*    callAjax() {
         $.get('http://localhost:8000/data/data.json', function (result) {
             this.setState({
                 header: result.poll.header,
@@ -29,9 +31,9 @@ class PollContainer extends React.Component {
                 numberOfQuestions: result.poll.questions.length
             });
         }.bind(this));
-    }
+    }*/
 
-    setCheckedValue(name,value){
+/*    setCheckedValue(name,value){
         var newChecked = this.state.checkedValue.slice(0,this.state.numberOfQuestions);
         newChecked[name] = value;
 
@@ -44,7 +46,7 @@ class PollContainer extends React.Component {
         if (value===this.state.correctAnswer){
             console.log('correct');
         }
-    }
+    }*/
 
 
     componentWillMount() {
@@ -53,7 +55,7 @@ class PollContainer extends React.Component {
 
     componentDidMount(){
         console.log('componentDidMount');
-        this.callAjax();
+        //this.callAjax();
     }
 
 
@@ -69,7 +71,7 @@ class PollContainer extends React.Component {
     }
     componentDidUpdate(){
         console.log('componentDidUpdate');
-        this.checkAnswer(this.state.checkedValue);
+        //this.checkAnswer(this.state.checkedValue);
     }
     componentWillUnmount() {
         console.log('componentWillUnmount()');
@@ -84,16 +86,16 @@ class PollContainer extends React.Component {
             padding: '10px'
         };
 
-        var questionsArray = this.state.questions;
+        var questionsArray = this.props.questions;
         var questionsOutput = questionsArray.map(function(question,questionNumber){
             return (
                 <div key={`question-number-${questionNumber}`}>
                     <PollQuestion text={question.question} />
                     <RadioButtonGroup
                         name={questionNumber}
-                        checkedValue={this.state.checkedValue[questionNumber]}
+                        checkedValue={this.props.checkedValue[questionNumber]}
                         choices={question.choices}
-                        onChange = {this.setCheckedValue} />
+                        onChange = {this.props.selectAnswer} />
                 </div>
             );
 
@@ -102,7 +104,7 @@ class PollContainer extends React.Component {
         return (
             <div className="container">
                 <div className="jumbotron">
-                    <PollHeader text={this.state.header} />
+                    <PollHeader text="Welcome to the Poll!" />
                 </div>
                 <div className="row" style={rowStyle}>
                     <div className="col-sm-4 col-sm-offset-4">

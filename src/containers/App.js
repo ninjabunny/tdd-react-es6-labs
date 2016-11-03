@@ -1,20 +1,19 @@
-import React from 'react';
-import {Link} from 'react-router';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import * as actionCreators from '../actions/actionCreators';
+import Main from './Main';
 
-class App extends React.Component {
-    render(){
-        return(
-            <div>
-                <ul className = "nav nav-pills">
-                    <li role="presentation" className="active"><Link to="/">Home</Link></li>
-                    <li role="presentation" className="active"><Link to="about">About Us</Link></li>
-                </ul>
-                <div>
-                    {React.cloneElement(this.props.children, this.props)}
-                </div>
-            </div>
-        );
+function mapStateToProps(state) {
+    return {
+        questions: state.questions,
+        checkedValue: state.checkedValue
     }
 }
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(actionCreators, dispatch);
+}
+
+const App = connect(mapStateToProps, mapDispatchToProps)(Main);
 
 export default App;
